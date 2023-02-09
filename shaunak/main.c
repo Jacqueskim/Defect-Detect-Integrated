@@ -17,13 +17,13 @@
 #define I2C_FREQ 100000
 uint16_t valvePositions[9][2]={
     {400,200},
+    {380,180},
     {400,200},
-    {400,200},
-    {400,200},
-    {400,200},
-    {400,200},
-    {400,200},
-    {400,200},
+    {380,180},
+    {390,190},
+    {390,190},
+    {380,180},
+    {370,170},
     {400,200},
 };
 void openValve(pca9685_driver_t PCA9685,uint8_t num,int time){
@@ -51,17 +51,17 @@ int main()
 
     initializeBelt();
     // moveBeltDistance(6,100);
-    setBeltSpeed(10);
-    // while (1)
-    // {
-    //     for(uint8_t i=0;i<9;i++){
-    //         openValve(PCA9685,i,250);
-    //         // MXC_Delay(MXC_DELAY_MSEC(2000));
-    //         uint32_t count=getBeltPosition();
-    //         printf("Value: %u\n",count);
+    setBeltSpeed(5);
+    while (1)
+    {
+        for(uint8_t i=0;i<9;i++){
+            openValve(PCA9685,i,250);
+            // MXC_Delay(MXC_DELAY_MSEC(2000));
+            uint32_t count=getBeltPosition();
+            printf("Value: %u\n",count);
 
-    //     }
-    // }
+        }
+    }
     
     return 0;
 }

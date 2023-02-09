@@ -1,4 +1,4 @@
-/Users/shaunak/Desktop/I2C_SCAN/build/main.o: main.c \
+/Users/shaunak/Desktop/ECE189/shaunak/build/main.o: main.c \
  /Users/shaunak/MaximSDK/Tools/GNUTools/10.3/arm-none-eabi/include/stdio.h \
  /Users/shaunak/MaximSDK/Tools/GNUTools/10.3/arm-none-eabi/include/_ansi.h \
  /Users/shaunak/MaximSDK/Tools/GNUTools/10.3/arm-none-eabi/include/newlib.h \
