@@ -1,2 +1,0 @@
-img_name,label,width,height,x0,y0,x1,y1,num_of_boxes,img_width,img_height,bb_x0,bb_y0,bb_x1,bb_y1
-Image_97.png,[1],[20],[15],[41],[20],[61],[35],1,100,100,41,20,61,35
