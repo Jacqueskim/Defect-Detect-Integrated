@@ -40,9 +40,11 @@ J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel/build/pos
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\machine\types.h \
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\sys\stdio.h \
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\math.h \
- include/tft_utils.h include/facedetection.h include/utils.h \
- J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/uart.h \
- J:/ECE189/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/uart_regs.h \
+ include/belt.h include/servoController.h include/queue.h \
+ include/PCA9685.h \
+ j:\ece189\maximsdk\tools\gnutools\10.3\lib\gcc\arm-none-eabi\10.3.1\include\float.h \
+ J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_delay.h \
+ J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/i2c.h \
  J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_sys.h \
  J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  J:/ECE189/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/max78000.h \
@@ -58,6 +60,10 @@ J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel/build/pos
  J:/ECE189/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/gpio_regs.h \
  J:/ECE189/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/lpgcr_regs.h \
  J:/ECE189/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/gcr_regs.h \
+ J:/ECE189/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/i2c_regs.h \
+ include/tft_utils.h include/facedetection.h include/utils.h \
+ J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/uart.h \
+ J:/ECE189/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/uart_regs.h \
  J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc.h \
  J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_delay.h \
@@ -89,7 +95,6 @@ J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel/build/pos
  J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/flc.h \
  J:/ECE189/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/flc_regs.h \
  J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/i2c.h \
- J:/ECE189/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/i2c_regs.h \
  J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/i2s.h \
  J:/ECE189/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/i2s_regs.h \
  J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/icc.h \
@@ -117,8 +122,4 @@ J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel/build/pos
  J:/ECE189/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/wdt_regs.h \
  J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/wut.h \
  J:/ECE189/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/wut_regs.h \
- include/MAXCAM_Debug.h include/servoController.h include/queue.h \
- include/PCA9685.h \
- j:\ece189\maximsdk\tools\gnutools\10.3\lib\gcc\arm-none-eabi\10.3.1\include\float.h \
- J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_delay.h \
- J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/i2c.h
+ include/MAXCAM_Debug.h include/servoController.h

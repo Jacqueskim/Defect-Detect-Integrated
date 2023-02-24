@@ -36,6 +36,8 @@
 #include <string.h>
 #include <stdio.h>
 #include <math.h>
+#include "belt.h"
+#include "servoController.h"
 
 //#define RETURN_LARGEST // If defined returns the largest face detected 
 
@@ -66,6 +68,7 @@
 
 void get_priors(void);
 void nms(void);
+void setController(ServoController *ssc);
 void get_cxcy(float* cxcy, int prior_idx);
 void gcxgcy_to_cxcy(float* cxcy, int prior_idx, float* priors_cxcy);
 void cxcy_to_xy(float* xy, float* cxcy);

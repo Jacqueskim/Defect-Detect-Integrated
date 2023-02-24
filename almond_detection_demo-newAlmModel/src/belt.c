@@ -56,7 +56,7 @@ void setBeltSpeed(uint8_t DUTY_CYCLE){
 }
 uint32_t getBeltPosition(){
     uint32_t count=MXC_TMR_GetCount(COUNTER_TIMER);
-    printf("Encoder method Count: %u\n",count);
+    //printf("Encoder method Count: %u\n",count);
     return count;
 }
 void moveBeltDistance(uint32_t inches,uint8_t speed){

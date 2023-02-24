@@ -40,6 +40,7 @@
 #include "MAXCAM_Debug.h"
 #include "servoController.h"
 
+
 #define S_MODULE_NAME "post_proc"
 
 uint32_t  camera_image[IMAGE_XRES*IMAGE_YRES*2/4];
@@ -63,7 +64,11 @@ static int num_nms_priors[NUM_CLASSES - 2];    // 40 bytes
 static uint16_t nms_scores[NUM_CLASSES - 2][MAX_PRIORS]; // 2000 bytes
 static uint16_t nms_indices[NUM_CLASSES - 2][MAX_PRIORS]; // 2000 bytes
 
+ServoController sec;
 
+void setController(ServoController *ssc){
+    sec = *ssc;
+}
 
 
 int get_prior_idx(int ar_idx, int scale_idx, int rel_idx)
@@ -511,6 +516,9 @@ void localize_objects(void)
 #endif 
                 utils_send_bytes(CommUart, snd_ptr, 4);
                 draw_obj_rect(xy, class_idx, IMAGE_SIZE_X, IMAGE_SIZE_Y, IMG_SCALE);
+                float xCenter = (xy[0] + xy[2])/2.0;
+                float yCenter = (xy[1] + xy[3])/2.0;
+                add_Object_To_Queue(&sec,xCenter,yCenter,getBeltPosition());
                 #endif
             }
         }

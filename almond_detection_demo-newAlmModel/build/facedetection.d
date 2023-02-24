@@ -121,5 +121,9 @@ J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel/build/fac
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\machine\stdlib.h \
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\alloca.h \
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\math.h \
+ include/belt.h include/servoController.h include/queue.h \
+ include/PCA9685.h \
+ j:\ece189\maximsdk\tools\gnutools\10.3\lib\gcc\arm-none-eabi\10.3.1\include\float.h \
+ J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/i2c.h \
  include/MAXCAM_Debug.h include/cnn.h \
  J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/lp.h
