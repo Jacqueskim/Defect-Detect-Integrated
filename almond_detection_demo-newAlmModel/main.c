@@ -18,12 +18,13 @@
 #include "post_process.h"
 #include "tft_utils.h"
 #include "servoController.h"
+#include "servoStopper.h"
 #include "PCA9685.h"
 #include "belt.h"
 #include "stdlib.h"
-
+#include "functions.h"
 ServoController sc;
-
+ServoStopper ss;
 #define CONSOLE_BAUD 115200
 #define COMM_BAUD 9600
 #define COMM_UART 3
@@ -198,6 +199,9 @@ void openValve(pca9685_driver_t PCA9685,uint8_t num,int time){
         PCA9685.setPWM(i,0,valvePositions[i][0]);
     }
    }
+}
+void object_detected(float x,float y){
+    add_Object_To_Queue(&sc,x,y,getBeltPosition());
 }
 
 int main(void)
