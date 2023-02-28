@@ -10,7 +10,6 @@ void init_servo_controller(ServoController *sc) {
 
 void add_position_to_queue(ServoController *sc, int queueIndex, int position) {
     if (queueIndex >= 0 && queueIndex < NUM_QUEUES) {
-        printf("Enqueueing %u @ index %u\n",position,queueIndex);
         enqueue(&sc->queues[queueIndex], position);
     } else {
         printf("Invalid queue index\n");
@@ -36,11 +35,10 @@ int is_queue_empty(ServoController *sc, int queueIndex) {
 }
 void add_Object_To_Queue(ServoController *sc, float x, float y, int currentEncoderVal)
 {
-    printf("input x is %f, input y is %f",x,y);
-    int servo = (int)(y*9.0);
+    int servo = (int)x*9.0;
     int newEncoderVal = currentEncoderVal;
     newEncoderVal += ENCODER_PER_INCH * LENGTH_OF_BELT_FROM_CAMERA_INCHES;
-    newEncoderVal += ENCODER_PER_SCREEN_HEIGHT * (1-x); // depends on the camera orientation if we need to flip the y or not
+    newEncoderVal += ENCODER_PER_SCREEN_HEIGHT * (1-y); // depends on the camera orientation if we need to flip the y or not
 
     if(servo % 2 == 1) // back line
     {
@@ -55,14 +53,12 @@ int *check_for_Encoder_Event(ServoController *sc, int encoderVal, int *numIndice
     for (int i = 0; i < NUM_QUEUES; i++) {
         if (!is_queue_empty(sc, i)) {
             int topVal = peek_top(&sc->queues[i]);
-            printf("The value stored at index %u is %u, the value e are checking is %u",i,topVal,encoderVal);
             if (topVal > encoderVal) {
                 indices[*numIndices] = i;
                 (*numIndices)++;
                 dequeue(&sc->queues[i]);
             }
         }
-        printf("index %u is off, the value e are checking \n",i);
     }
     return indices;
 }

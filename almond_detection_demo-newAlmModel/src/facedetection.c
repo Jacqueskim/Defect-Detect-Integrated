@@ -71,7 +71,6 @@ void run_cnn(int x_offset, int y_offset);
 static void ARM_low_power(int lp_mode);
 #endif
 
-
 int face_detection(void)
 {
 
@@ -240,7 +239,7 @@ void run_cnn(int x_offset, int y_offset)
 
             // Loading data into the CNN fifo
             while (((*((volatile uint32_t*)0x50000004) & 1)) != 0)
-            ; // Wait for FIFO 0
+                ; // Wait for FIFO 0
 
             number = 0x00FFFFFF & ((((uint8_t)b) << 16) | (((uint8_t)g) << 8) | ((uint8_t)r));
 

@@ -1,4 +1,5 @@
 
+
 #define S_MODULE_NAME "main"
 
 /***** Includes *****/
@@ -18,13 +19,11 @@
 #include "post_process.h"
 #include "tft_utils.h"
 #include "servoController.h"
-#include "servoStopper.h"
 #include "PCA9685.h"
 #include "belt.h"
-#include "stdlib.h"
-#include "functions.h"
+
 ServoController sc;
-ServoStopper ss;
+
 #define CONSOLE_BAUD 115200
 #define COMM_BAUD 9600
 #define COMM_UART 3
@@ -190,6 +189,7 @@ uint32_t ticks_2;
 mxc_wut_cfg_t cfg;
 
 
+
 void openValve(pca9685_driver_t PCA9685,uint8_t num,int time){
     PCA9685.setPWM(num,0,valvePositions[num][0]);
     //MXC_Delay(MXC_DELAY_MSEC(time));
@@ -199,9 +199,6 @@ void openValve(pca9685_driver_t PCA9685,uint8_t num,int time){
         PCA9685.setPWM(i,0,valvePositions[i][0]);
     }
    }
-}
-void object_detected(float x,float y){
-    add_Object_To_Queue(&sc,x,y,getBeltPosition());
 }
 
 int main(void)
@@ -343,7 +340,7 @@ int main(void)
     //Setup the I2CM
     error = MXC_I2C_Init(I2C_MASTER, 1, 0);
     init_servo_controller(&sc);
-    setController(&sc);
+    
     if (error != E_NO_ERROR) {
         printf("-->Failed master\n");
         return error;
@@ -354,50 +351,42 @@ int main(void)
     pca9685_driver_t PCA9685 = PCA9685_Open();
     PCA9685.init(I2C_MASTER,PCA9685_I2C_SLAVE_ADDR);
     PCA9685.setPWMFreq(50);
-    
+
     initializeBelt();
     // moveBeltDistance(6,100);
     setBeltSpeed(5);
-     for(int i = 0; i < 10; i++){
-        PCA9685.setPWM(i,0,valvePositions[i][1]);
-   }
+
 
     //Add some vals to belt
-   /*  int num_queues_to_append_to = 1;
+    int num_queues_to_append_to = 1;
     float valuesx[3] = {.1, .5, .76};
     float valuesy[3] = {.25, .5, .8};
-   for (int i = 0; i < num_queues_to_append_to; i++) {
+    for (int i = 0; i < num_queues_to_append_to; i++) {
         for (int j = 0; j < 3; j++) {
             add_Object_To_Queue(&sc,valuesx[j],valuesy[j],getBeltPosition());
         }
     }
-*/
+
  
     // // Setup NMS algorithm memory
     nms_memory_init();
 
     draw_image_rectangle();
 
-
-
-
     while (1)
     {
         uint32_t count = getBeltPosition();
-       // printf("Encoder Count: %u\n",count);
+        printf("Encoder Count: %u\n",count);
         int *indices;
-        int numberOfServosOn=0;
-        indices = check_for_Encoder_Event(&sc, count, &numberOfServosOn);
-        //printf("In helper_function, %d queues have top values greater than %d:\n",numberOfServosOn, count);
-       /* for (int k = 0; k < numberOfServosOn; k++) {
-            printf("opening valve: %u\n",count);
-            openValve(PCA9685,indices[k],250);
-        }
-        */
-        free(indices);
-        // face_detection();
+        int numberOfServosOn;
+        //indices = check_for_Encoder_Event(&sc, count, &numberOfServosOn);
+        //printf("In helper_function, %d queues have top values greater than %d:\n", count, encoderVal);
+       // for (int k = 0; k < numberOfServosOn; k++) {
+           // openValve(PCA9685,indices[k],250);
+       // }
+        //face_detection();
         MXC_SYS_ClockEnable(MXC_SYS_PERIPH_CLOCK_CNN);
-        run_cnn(0,0);
+        run_cnn(0, 0);
     }
 
     return 0;

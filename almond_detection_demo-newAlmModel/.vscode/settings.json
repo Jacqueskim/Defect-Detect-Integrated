@@ -95,9 +95,7 @@
         "servocontroller.h": "c",
         "facedetection.h": "c",
         "mxc_delay.h": "c",
-        "stdio.h": "c",
-        "mxc.h": "c",
-        "mxc_sys.h": "c"
+        "stdio.h": "c"
     },
     "git.ignoreLimitWarning": true
 }
