@@ -379,11 +379,13 @@ int main(void)
         printf("Encoder Count: %u\n",count);
         int *indices;
         int numberOfServosOn;
-        //indices = check_for_Encoder_Event(&sc, count, &numberOfServosOn);
+        indices = check_for_Encoder_Event(&sc, count, &numberOfServosOn);
         //printf("In helper_function, %d queues have top values greater than %d:\n", count, encoderVal);
-       // for (int k = 0; k < numberOfServosOn; k++) {
-           // openValve(PCA9685,indices[k],250);
-       // }
+        for (int k = 0; k < numberOfServosOn; k++) {
+           PCA9685.setPWM(indices[k],0,valvePositions[indices[k]][0]);
+           
+        }
+        free(indices);
         //face_detection();
         MXC_SYS_ClockEnable(MXC_SYS_PERIPH_CLOCK_CNN);
         run_cnn(0, 0);
