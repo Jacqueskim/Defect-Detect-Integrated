@@ -36,6 +36,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <math.h>
+#include "functions.h"
 
 //#define RETURN_LARGEST // If defined returns the largest face detected 
 

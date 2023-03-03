@@ -20,7 +20,6 @@ void enqueue(Queue *q, int value) {
 
 int dequeue(Queue *q) {
     if (is_empty(q)) {
-        printf("Queue is empty\n");
         return -1;
     }
 
@@ -32,7 +31,6 @@ int dequeue(Queue *q) {
 
 int peek_top(Queue *q) {
     if (is_empty(q)) {
-        printf("Queue is empty\n");
         return -1;
     }
 

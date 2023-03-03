@@ -2,7 +2,7 @@
 #define SERVOSTOPPER_H
 
 #define ARRAY_SIZE 9
-#define SERVO_CLOSE_OFFSET 500
+#define SERVO_CLOSE_OFFSET 10000
 
 
 

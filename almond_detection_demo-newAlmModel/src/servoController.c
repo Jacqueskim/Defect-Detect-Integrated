@@ -8,12 +8,18 @@ void init_servo_controller(ServoController *sc) {
     }
 }
 
-void add_position_to_queue(ServoController *sc, int queueIndex, int position) {
+int add_position_to_queue(ServoController *sc, int queueIndex, int position) {
     if (queueIndex >= 0 && queueIndex < NUM_QUEUES) {
-        enqueue(&sc->queues[queueIndex], position);
+         int topVal = peek_top(&sc->queues[queueIndex]);
+         if(topVal < 0 || topVal < (position + QUEUEING_THRESHOLD)){
+            enqueue(&sc->queues[queueIndex], position);
+            return 1;
+         } // otherwise it was from the same object
+        
     } else {
         printf("Invalid queue index\n");
     }
+    return 0;
 }
 
 int get_next_position(ServoController *sc, int queueIndex) {
@@ -35,16 +41,22 @@ int is_queue_empty(ServoController *sc, int queueIndex) {
 }
 void add_Object_To_Queue(ServoController *sc, float x, float y, int currentEncoderVal)
 {
-    int servo = (int)y*5.0 + 2;
+    int servo = servo_mapper(0.0,1.0,y);
     int newEncoderVal = currentEncoderVal;
-    newEncoderVal += ENCODER_PER_INCH * LENGTH_OF_BELT_FROM_CAMERA_INCHES;
-    newEncoderVal += ENCODER_PER_SCREEN_HEIGHT * (1-x); // depends on the camera orientation if we need to flip the y or not
+    newEncoderVal += (int)BASE_OFFSET;
+    newEncoderVal +=(int)(ENCODER_PER_SCREEN_HEIGHT * (x)); // depends on the camera orientation if we need to flip the y or not
 
-    if(servo % 2 == 1) // back line
+    if(servo > 4) // back line
     {
         newEncoderVal += ENCODER_BACK_LINE_OFFSET;
     }
-    add_position_to_queue(sc,servo, newEncoderVal);
+    int added = add_position_to_queue(sc,servo, newEncoderVal);
+    if(added == 1){
+        printf("Encoded an object at servo: %u, with an encoder offset of %u \n",servo,(newEncoderVal - currentEncoderVal));
+    }else{
+        printf("Did not queue due to thresholding");
+    }
+    
 }
 int *check_for_Encoder_Event(ServoController *sc, int encoderVal, int *numIndices) {
     int *indices = (int*) malloc(NUM_QUEUES * sizeof(int));
@@ -60,4 +72,23 @@ int *check_for_Encoder_Event(ServoController *sc, int encoderVal, int *numIndice
         
     }
     return indices;
+}
+
+int servo_mapper(float min_y, float max_y, float y){
+    float diff = (max_y - min_y)/5;
+    int range = (y - min_y)/diff;
+    switch (range)
+    {
+    case 0:
+        return 2;
+    case 1:
+        return 7;
+    case 2:
+        return 1;
+    case 3:
+        return 8;
+    case 4:
+        return 0;
+    }
+    
 }

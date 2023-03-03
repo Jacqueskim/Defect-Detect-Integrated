@@ -40,7 +40,8 @@ J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel/build/pos
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\machine\types.h \
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\sys\stdio.h \
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\math.h \
- include/tft_utils.h include/facedetection.h include/utils.h \
+ include/functions.h include/tft_utils.h include/facedetection.h \
+ include/utils.h \
  J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/uart.h \
  J:/ECE189/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/uart_regs.h \
  J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_sys.h \

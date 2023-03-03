@@ -511,6 +511,7 @@ void localize_objects(void)
 #endif 
                 utils_send_bytes(CommUart, snd_ptr, 4);
                 draw_obj_rect(xy, class_idx, IMAGE_SIZE_X, IMAGE_SIZE_Y, IMG_SCALE);
+                object_detected((xy[0]+xy[2]) /2.0, (xy[1]+xy[3])/2.0 );
                 #endif
             }
         }

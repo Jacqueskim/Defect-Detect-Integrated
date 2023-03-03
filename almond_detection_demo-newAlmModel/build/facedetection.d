@@ -121,5 +121,5 @@ J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel/build/fac
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\machine\stdlib.h \
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\alloca.h \
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\math.h \
- include/MAXCAM_Debug.h include/cnn.h \
+ include/functions.h include/MAXCAM_Debug.h include/cnn.h \
  J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/lp.h

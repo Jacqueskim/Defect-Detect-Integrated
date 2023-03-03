@@ -19,10 +19,12 @@
 #include "post_process.h"
 #include "tft_utils.h"
 #include "servoController.h"
+#include "servoStopper.h"
 #include "PCA9685.h"
 #include "belt.h"
 
 ServoController sc;
+ServoStopper ss;
 
 #define CONSOLE_BAUD 115200
 #define COMM_BAUD 9600
@@ -201,6 +203,15 @@ void openValve(pca9685_driver_t PCA9685,uint8_t num,int time){
    }
 }
 
+void object_detected(float x, float y){
+    add_Object_To_Queue(&sc,x,y,getBeltPosition());
+    printf("x center is: %f , y center is %f \n",x,y);
+}
+void object_detected_test(float x, float y, int testVal){
+    add_Object_To_Queue(&sc,x,y,testVal);
+    printf("x center is: %f , y center is %f \n",x,y);
+}
+
 int main(void)
 {
     int ret = 0;
@@ -340,6 +351,7 @@ int main(void)
     //Setup the I2CM
     error = MXC_I2C_Init(I2C_MASTER, 1, 0);
     init_servo_controller(&sc);
+    init_servo_stopper(&ss);
     
     if (error != E_NO_ERROR) {
         printf("-->Failed master\n");
@@ -356,34 +368,54 @@ int main(void)
     // moveBeltDistance(6,100);
     setBeltSpeed(5);
 
-
-    //Add some vals to belt
-    int num_queues_to_append_to = 1;
-    float valuesx[3] = {.1, .5, .76};
-    float valuesy[3] = {.25, .5, .8};
-    for (int i = 0; i < num_queues_to_append_to; i++) {
-        for (int j = 0; j < 3; j++) {
-            add_Object_To_Queue(&sc,valuesx[j],valuesy[j],getBeltPosition());
-        }
+    //close valves
+    for(int i = 0; i < 9; i++){
+        PCA9685.setPWM(i,0,valvePositions[i][1]);
+       // MXC_Delay(MXC_DELAY_MSEC(1000));
     }
+    
+    //Add some vals to belt
+    // int num_queues_to_append_to = 1;
+    // float valuesx[3] = {.1, .5, .76};
+    // float valuesy[3] = {.25, .5, .8};
+    // for (int i = 0; i < num_queues_to_append_to; i++) {
+    //     for (int j = 0; j < 3; j++) {
+    //         add_Object_To_Queue(&sc,valuesx[j],valuesy[j],getBeltPosition());
+    //     }
+    // }
 
  
     // // Setup NMS algorithm memory
     nms_memory_init();
 
     draw_image_rectangle();
-
+   /*object_detected_test(0,0,0);
+    object_detected_test(0,.2,500);
+    object_detected_test(0,.4,1000);
+    object_detected_test(0,.6,1500);
+    object_detected_test(0,.8,2000);
+    object_detected_test(0,1,2500);
+   */ 
     while (1)
     {
         uint32_t count = getBeltPosition();
-        printf("Encoder Count: %u\n",count);
+        //printf("Encoder Count: %u\n",count);
         int *indices;
         int numberOfServosOn;
         indices = check_for_Encoder_Event(&sc, count, &numberOfServosOn);
         //printf("In helper_function, %d queues have top values greater than %d:\n", count, encoderVal);
         for (int k = 0; k < numberOfServosOn; k++) {
            PCA9685.setPWM(indices[k],0,valvePositions[indices[k]][0]);
-           
+           printf("turning on servo: %u\n", indices[k]);
+           add_to_servo_count(&ss,indices[k],count);
+        }
+
+        
+
+        indices = check_for_Close_Event(&ss, count, &numberOfServosOn);
+        for (int k = 0; k < numberOfServosOn; k++) {
+           PCA9685.setPWM(indices[k],0,valvePositions[indices[k]][1]);
+           printf("closing servo: %u\n", indices[k]);
         }
         free(indices);
         //face_detection();
