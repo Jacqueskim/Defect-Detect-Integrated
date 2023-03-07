@@ -52,7 +52,7 @@ uint16_t valvePositions[9][2]={
 static const uint8_t camera_settings[][2] = {
     {0x13, 0xEA},
     {0x15, 0x03},
-    {0x00, 0x00},
+    {0x00, 0x01},
     {0x10, 0x0F},
     {0x0F, 0x07},
     {0x0e, 0x08}, // Sleep mode
@@ -223,6 +223,7 @@ int main(void)
 #ifdef BOARD_FTHR_REVA
     // Wait for PMIC 1.8V to become available, about 180ms after power up.
     MXC_Delay(200000);
+    
 #endif
     /* Enable cache */
     MXC_ICC_Enable(MXC_ICC0);
@@ -399,7 +400,7 @@ int main(void)
     while (1)
     {
         uint32_t count = getBeltPosition();
-        //printf("Encoder Count: %u\n",count);
+        printf("Encoder Count: %u\n",count);
         int *indices;
         int numberOfServosOn;
         indices = check_for_Encoder_Event(&sc, count, &numberOfServosOn);

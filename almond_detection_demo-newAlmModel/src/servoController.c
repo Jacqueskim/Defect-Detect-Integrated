@@ -41,7 +41,7 @@ int is_queue_empty(ServoController *sc, int queueIndex) {
 }
 void add_Object_To_Queue(ServoController *sc, float x, float y, int currentEncoderVal)
 {
-    int servo = servo_mapper(0.0,1.0,y);
+    int servo = servo_mapper(0,1.0,y);
     int newEncoderVal = currentEncoderVal;
     newEncoderVal += (int)BASE_OFFSET;
     newEncoderVal +=(int)(ENCODER_PER_SCREEN_HEIGHT * (x)); // depends on the camera orientation if we need to flip the y or not
@@ -75,19 +75,17 @@ int *check_for_Encoder_Event(ServoController *sc, int encoderVal, int *numIndice
 }
 
 int servo_mapper(float min_y, float max_y, float y){
-    float diff = (max_y - min_y)/5;
+    float diff = (max_y - min_y)/4;
     int range = (y - min_y)/diff;
     switch (range)
     {
     case 0:
-        return 2;
-    case 1:
         return 7;
-    case 2:
+    case 1:
         return 1;
-    case 3:
+    case 2:
         return 8;
-    case 4:
+    case 3:
         return 0;
     }
     

@@ -36,38 +36,47 @@
             ],
             "group": "build",
             "problemMatcher": [],
-            "dependsOn":["build"]
+            "dependsOn": [
+                "build"
+            ]
         },
         {
             "label": "flash & run",
             "type": "shell",
             "command": "arm-none-eabi-gdb",
-            "args": [                
+            "args": [
                 "--cd=\"${workspaceFolder}\"",
                 "--se=\"build/${config:program_file}\"",
                 "--symbols=build/${config:symbol_file}",
-                "-x=\"${workspaceFolder}/.vscode/flash.gdb\"",                
+                "-x=\"${workspaceFolder}/.vscode/flash.gdb\"",
                 "--ex=\"flash_m4_run ${config:OCD_path} ${config:M4_OCD_interface_file} ${config:M4_OCD_target_file}\"",
                 "--batch"
             ],
             "group": "build",
             "problemMatcher": [],
-            "dependsOn":["build"]
+            "dependsOn": [
+                "build"
+            ]
         },
         {
             "label": "erase flash",
             "type": "shell",
             "command": "openocd",
             "args": [
-                "-s", "${config:OCD_path}/scripts",
-                "-f", "interface/${config:M4_OCD_interface_file}",
-                "-f", "target/${config:M4_OCD_target_file}",
-                "-c", "\"init; reset halt; max32xxx mass_erase 0;\"",
-                "-c", "exit"
+                "-s",
+                "${config:OCD_path}/scripts",
+                "-f",
+                "interface/${config:M4_OCD_interface_file}",
+                "-f",
+                "target/${config:M4_OCD_target_file}",
+                "-c",
+                "\"init; reset halt; max32xxx mass_erase 0;\"",
+                "-c",
+                "exit"
             ],
-            "group":"build",
+            "group": "build",
             "problemMatcher": [],
-            "dependsOn":[]
+            "dependsOn": []
         },
         {
             "label": "openocd (m4)",
@@ -84,7 +93,7 @@
                 "\"init; reset halt\""
             ],
             "problemMatcher": [],
-            "dependsOn":[]
+            "dependsOn": []
         },
         {
             "label": "gdb (m4)",
@@ -93,14 +102,25 @@
             "args": [
                 "--ex=\"cd ${workspaceFolder}\"",
                 "--se=\"build/${config:program_file}\"",
-                "--symbols=build/${config:symbol_file}",                
+                "--symbols=build/${config:symbol_file}",
                 "--ex=\"target remote localhost:3333\"",
                 "--ex=\"monitor reset halt\"",
                 "--ex=\"b main\"",
                 "--ex=\"c\""
             ],
             "problemMatcher": [],
-            "dependsOn":[]
+            "dependsOn": []
         },
+        {
+            "type": "java (build)",
+            "paths": [
+                "${workspace}"
+            ],
+            "isFullBuild": true,
+            "group": "build",
+            "problemMatcher": [],
+            "label": "java (build): Build Workspace",
+            "detail": "$(tools) Build all the Java projects in workspace."
+        }
     ]
 }
