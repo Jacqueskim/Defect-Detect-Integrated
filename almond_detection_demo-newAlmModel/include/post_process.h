@@ -62,8 +62,8 @@
 #define MAX_PRIORS       20// 3 ///!1
 #endif
 
-#define MIN_CLASS_SCORE     16384//41000//32768  // ~0.25*65536
-#define MAX_ALLOWED_OVERLAP  0.3//.5 //170
+#define MIN_CLASS_SCORE     4000//41000//32768  // ~0.25*65536
+#define MAX_ALLOWED_OVERLAP  .5 //170
 
 void get_priors(void);
 void nms(void);

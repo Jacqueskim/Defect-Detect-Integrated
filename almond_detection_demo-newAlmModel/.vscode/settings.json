@@ -1,5 +1,5 @@
 {
-    "MAXIM_PATH":"C:/MaximSDK", // Set this to the installed location of the MaximSDK.  Only use forward slashes '/' when setting this path!
+    "MAXIM_PATH":"J:/ECE189/MaximSDK", // Set this to the installed location of the MaximSDK.  Only use forward slashes '/' when setting this path!
     "update.mode": "manual",
     "extensions.autoUpdate": false,
 
