@@ -45,8 +45,8 @@
 #define TFT_WIDTH  320
 #define TFT_HEIGHT 240
 
-#define IMAGE_XRES 224
-#define IMAGE_YRES 168
+#define CAMERA_IMAGE_XRES 300//224
+#define CAMERA_IMAGE_YRES 168//168
 #define IMAGE_SIZE_X 168
 #define IMAGE_SIZE_Y 224
 
@@ -56,6 +56,7 @@
 #define IMAGE_H     168
 #define IMAGE_W     224
 #define FRAME_COLOR 0x535A
+#define X_OFFSET    CAMERA_IMAGE_XRES - IMAGE_W
 
 #define LCD_BYTE_PER_PIXEL 2  //RGB565
 
@@ -70,5 +71,7 @@
 // Data input: HWC (little data): 160x120x3
 #define DATA_SIZE_IN (224 * 168 * 3)
 
+
 int face_detection(void);
+uint8_t get_offset(void);
 #endif // _FACEDETECTION_H_

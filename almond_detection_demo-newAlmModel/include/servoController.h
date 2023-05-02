@@ -19,7 +19,8 @@ void init_servo_controller(ServoController *sc);
 int add_position_to_queue(ServoController *sc, int queueIndex, int position);
 int get_next_position(ServoController *sc, int queueIndex);
 int is_queue_empty(ServoController *sc, int queueIndex);
-void add_Object_To_Queue(ServoController *sc, float x, float y, int currentEncoderVal);
+void add_Object_To_Queue(ServoController *sc, float x, float y, int currentEncoderVal, uint8_t offset);
 int *check_for_Encoder_Event(ServoController *sc, int encoderVal, int *numIndices);
-int servo_mapper(float min_x, float max_x, float x);
+int odd_servo_mapper(float min_x, float max_x, float x);
+int even_servo_mapper(float min_x, float max_x, float x);
 #endif

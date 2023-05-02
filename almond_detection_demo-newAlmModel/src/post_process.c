@@ -42,7 +42,7 @@
 
 #define S_MODULE_NAME "post_proc"
 
-uint32_t  camera_image[IMAGE_XRES*IMAGE_YRES*2/4];
+uint32_t  camera_image[CAMERA_IMAGE_XRES*CAMERA_IMAGE_YRES*2/4];
 extern mxc_uart_regs_t* CommUart;
 
 const int dims[NUM_SCALES][2] = {{56,42}, {14,10}};

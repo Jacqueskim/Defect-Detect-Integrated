@@ -52,10 +52,10 @@ uint16_t valvePositions[9][2]={
 #if 1 // Custom camera settings
 static const uint8_t camera_settings[][2] = {
     {0x13, 0xEA},
-    {0x15, 0x03},
-    {0x00, 0x01},
-    {0x10, 0x0F},
-    {0x0F, 0x07},
+    {0x15, 0x00}, // Gain control(9:8)
+    {0x00, 0x1F}, // Gain control(7:0)
+    {0x0F, 0x7F}, // Exposure time control (15:8)
+    {0x10, 0xFF}, // Exposure time control (7:0)
     {0x0e, 0x08}, // Sleep mode
     {0x69, 0x52}, // BLC window selection, BLC enable (default is 0x12)
     {0x1e, 0xb3}, // AddLT1F (default 0xb1)
@@ -204,12 +204,14 @@ void openValve(pca9685_driver_t PCA9685,uint8_t num,int time){
    }
 }
 
+
+
 void object_detected(float x, float y){
-    add_Object_To_Queue(&sc,x,y,getBeltPosition());
+    add_Object_To_Queue(&sc,x,y,getBeltPosition(), get_offset());
     printf("x center is: %f , y center is %f \n",x,y);
 }
 void object_detected_test(float x, float y, int testVal){
-    add_Object_To_Queue(&sc,x,y,testVal);
+    add_Object_To_Queue(&sc,x,y,testVal,get_offset());
     printf("x center is: %f , y center is %f \n",x,y);
 }
 
@@ -314,7 +316,7 @@ int main(void)
 #endif
 
     // Setup the camera image dimensions, pixel format and data acquiring details.
-    ret = camera_setup(IMAGE_XRES, IMAGE_YRES, PIXFORMAT_RGB565, FIFO_FOUR_BYTE, STREAMING_DMA,
+    ret = camera_setup(CAMERA_IMAGE_XRES, CAMERA_IMAGE_YRES, PIXFORMAT_RGB565, FIFO_FOUR_BYTE, STREAMING_DMA,
                        dma_channel);
     if (ret != STATUS_OK)
     {

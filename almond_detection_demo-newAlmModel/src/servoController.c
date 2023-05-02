@@ -39,9 +39,15 @@ int is_queue_empty(ServoController *sc, int queueIndex) {
         return 1;
     }
 }
-void add_Object_To_Queue(ServoController *sc, float x, float y, int currentEncoderVal)
+void add_Object_To_Queue(ServoController *sc, float x, float y, int currentEncoderVal, uint8_t offset)
 {
-    int servo = servo_mapper(0,1.0,y);
+    int servo = 0;
+    // if (offset == 0){
+        servo = odd_servo_mapper(0,1.0,y);
+    // } else {
+    //     servo = even_servo_mapper(0,1.0,y);
+    // }
+    
     int newEncoderVal = currentEncoderVal;
     newEncoderVal += (int)BASE_OFFSET;
     newEncoderVal +=(int)(ENCODER_PER_SCREEN_HEIGHT * (x)); // depends on the camera orientation if we need to flip the y or not
@@ -74,19 +80,40 @@ int *check_for_Encoder_Event(ServoController *sc, int encoderVal, int *numIndice
     return indices;
 }
 
-int servo_mapper(float min_y, float max_y, float y){
-    float diff = (max_y - min_y)/4;
+int odd_servo_mapper(float min_y, float max_y, float y){
+    float diff = (max_y - min_y)/5;
     int range = (y - min_y)/diff;
     switch (range)
     {
     case 0:
-        return 7;
+        return 0;
     case 1:
         return 1;
     case 2:
-        return 8;
+        return 2;
     case 3:
-        return 0;
+        return 3;
+    case 4:
+        return 4;
+    }
+    
+}
+
+int even_servo_mapper(float min_y, float max_y, float y){
+    float diff = (max_y - min_y)/5;
+    int range = (y - min_y)/diff;
+    switch (range)
+    {
+    case 0:
+        return 4;
+    case 1:
+        return 5;
+    case 2:
+        return 6;
+    case 3:
+        return 7;
+    case 4:
+        return 8;
     }
     
 }

@@ -60,8 +60,9 @@
 extern uint32_t ticks_1;
 extern uint32_t ticks_2;
 extern mxc_wut_cfg_t cfg;
-extern uint32_t  camera_image[IMAGE_XRES*IMAGE_YRES*2/4];
+extern uint32_t  camera_image[IMAGE_SIZE_X*IMAGE_SIZE_Y*2/4];
 
+uint8_t parity = 0;
 /************************************ VARIABLES ******************************/
 volatile uint32_t cnn_time; // Stopwatch
 
@@ -70,6 +71,12 @@ void run_cnn(int x_offset, int y_offset);
 #ifdef LP_MODE_ENABLE
 static void ARM_low_power(int lp_mode);
 #endif
+
+uint8_t get_offset(void)
+{
+    return parity;
+}
+
 
 int face_detection(void)
 {
@@ -161,14 +168,21 @@ void run_cnn(int x_offset, int y_offset)
     uint8_t* raw = NULL;
     int row;
 
+    static int offset = 0;
 
-    stream_stat_t *stat;
+     stream_stat_t *stat;
     camera_start_capture_image();
 
     // Get the details of the image from the camera driver.
     camera_get_image(&raw, &imgLen, &w, &h);
 
-    //printf("w:%d: h%d \n",w,h);
+    offset ^= X_OFFSET; //Alternate left and right 224x168 image from 448x240 frame
+    if (offset == 0){
+        parity = 0;
+    } else {
+        parity = 1;
+    }
+    printf("w:%d: h%d  offset:%d\n",w,h,offset);
 
     // Get image line by line
     for (row = 0; row < h; row++) {    
@@ -180,8 +194,9 @@ void run_cnn(int x_offset, int y_offset)
         };
 
         // Copy image row to the buffer
-       memcpy((uint8_t*)&camera_image[row*IMAGE_W*LCD_BYTE_PER_PIXEL/4], raw, IMAGE_W*LCD_BYTE_PER_PIXEL);
-       //MXC_TFT_ShowImageCameraRGB565(row + X_START, Y_START , raw, w, 1);
+        if (row<IMAGE_H)
+            memcpy((uint8_t*)&camera_image[row*IMAGE_W*LCD_BYTE_PER_PIXEL/4], raw + offset*LCD_BYTE_PER_PIXEL, IMAGE_W*LCD_BYTE_PER_PIXEL);
+       //MXC_TFT_ShowImageCameraRGB565(row + X_START, Y_START , raw, IMAGE_SIZE_Y, 1);
 
         // Release stream buffer
         release_camera_stream_buffer();
@@ -201,10 +216,10 @@ void run_cnn(int x_offset, int y_offset)
 
     #ifdef TFT_ENABLE
         #ifdef BOARD_FTHR_REVA
-            MXC_TFT_ShowImageCameraRGB565(X_START, Y_START, raw, w, h);
+            MXC_TFT_ShowImageCameraRGB565(X_START, Y_START, raw, IMAGE_SIZE_Y, IMAGE_SIZE_X);
         #endif
         #ifdef BOARD_EVKIT_V1
-            MXC_TFT_ShowImageCameraRGB565(X_START, Y_START, raw, h, w);
+            MXC_TFT_ShowImageCameraRGB565(X_START, Y_START, raw, IMAGE_SIZE_X, IMAGE_SIZE_Y);
         #endif
     #endif
     
@@ -220,6 +235,35 @@ void run_cnn(int x_offset, int y_offset)
 
     pass_time = utils_get_time_ms();
 
+#if 1
+    for (int i = y_offset; i < HEIGHT + y_offset; i++) {
+
+            data = raw;
+            data += i * BYTE_PER_PIXEL;
+            for (int j = x_offset; j < WIDTH + x_offset; j++) {
+                uint8_t ur, ug, ub;
+                int8_t r, g, b;
+                uint32_t number;
+
+                ub = (uint8_t)(data[j * BYTE_PER_PIXEL * IMAGE_W + 1] << 3);
+                ug = (uint8_t)((data[j * BYTE_PER_PIXEL * IMAGE_W] << 5) |
+                            ((data[j * BYTE_PER_PIXEL * IMAGE_W + 1] & 0xE0) >> 3));
+                ur = (uint8_t)(data[j * BYTE_PER_PIXEL * IMAGE_W] & 0xF8);
+                b = ub - 128;
+                g = ug - 128;
+                r = ur - 128;
+
+                // Loading data into the CNN fifo
+                while (((*((volatile uint32_t*)0x50000004) & 1)) != 0)
+                    ; // Wait for FIFO 0
+
+                number = 0x00FFFFFF & ((((uint8_t)b) << 16) | (((uint8_t)g) << 8) | ((uint8_t)r));
+
+                *((volatile uint32_t*)0x50000008) = number; // Write FIFO 0
+                
+            }
+        }
+#else
     for (int i = y_offset; i < HEIGHT + y_offset; i++) {
 
         data = raw + ((IMAGE_H - (WIDTH)) / 2) * IMAGE_W * BYTE_PER_PIXEL;
@@ -247,8 +291,8 @@ void run_cnn(int x_offset, int y_offset)
             
         }
     }
-
-    //LED_Off(1);S
+#endif
+    //LED_Off(1);
     
     //int cnn_load_time = utils_get_time_ms() - pass_time;
     //PR_DEBUG("CNN load data time : %d", cnn_load_time);
