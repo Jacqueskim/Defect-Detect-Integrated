@@ -1,4 +1,4 @@
-J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel/build/led.o: \
+J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel_new/build/led.o: \
  j:\ece189\maximsdk\libraries\miscdrivers\led\led.c \
  J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
  J:/ECE189/MaximSDK/Libraries/CMSIS/Device/Maxim/MAX78000/Include/max78000.h \

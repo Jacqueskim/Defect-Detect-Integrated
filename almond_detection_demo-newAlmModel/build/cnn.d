@@ -1,4 +1,4 @@
-J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel/build/cnn.o: \
+J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel_new/build/cnn.o: \
  src/cnn.c \
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\stdlib.h \
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\machine\ieeefp.h \

@@ -1,4 +1,4 @@
-J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel/build/main.o: \
+J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel_new/build/main.o: \
  main.c \
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\stdio.h \
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\_ansi.h \

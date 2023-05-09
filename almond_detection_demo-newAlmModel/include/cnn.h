@@ -6,7 +6,7 @@
 **************************************************************************************************/
 
 /*
- * This header file was automatically generated for the AlmModel_0_3_ALM65_10k_blur_randScale1.2-0.8 network from a template.
+ * This header file was automatically @generated for the PINTO7 network from a template.
  * Please do not edit; instead, edit the template and regenerate.
  */
 
@@ -23,34 +23,34 @@ typedef int16_t q15_t;
 
 /*
   SUMMARY OF OPS
-  Hardware: 85,240,092 ops (85,009,968 macc; 230,124 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 0: 629,740 ops (591,408 macc; 38,332 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 1: 1,524,096 ops (1,492,992 macc; 31,104 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 2: 5,992,704 ops (5,971,968 macc; 20,736 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 3: 11,964,672 ops (11,943,936 macc; 20,736 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 4: 11,964,672 ops (11,943,936 macc; 20,736 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 5: 11,964,672 ops (11,943,936 macc; 20,736 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 6: 23,929,344 ops (23,887,872 macc; 41,472 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 7 (backbone_conv8): 11,954,304 ops (11,943,936 macc; 10,368 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 8 (backbone_conv9): 2,996,352 ops (2,985,984 macc; 10,368 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 9 (backbone_conv10): 759,456 ops (746,496 macc; 12,960 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 10 (conv12_1): 374,544 ops (373,248 macc; 1,296 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 11 (conv12_2): 38,144 ops (36,864 macc; 1,280 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 12: 746,496 ops (746,496 macc; 0 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 13: 18,432 ops (18,432 macc; 0 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 14: 373,248 ops (373,248 macc; 0 comp; 0 add; 0 mul; 0 bitwise)
-    Layer 15: 9,216 ops (9,216 macc; 0 comp; 0 add; 0 mul; 0 bitwise)
+  Hardware: 618,634,240 ops (616,976,640 macc; 1,657,600 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 0: 4,327,680 ops (4,064,256 macc; 263,424 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 1: 11,063,808 ops (10,838,016 macc; 225,792 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 2: 43,502,592 ops (43,352,064 macc; 150,528 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 3: 86,854,656 ops (86,704,128 macc; 150,528 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 4: 86,854,656 ops (86,704,128 macc; 150,528 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 5: 86,854,656 ops (86,704,128 macc; 150,528 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 6: 173,709,312 ops (173,408,256 macc; 301,056 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 7 (backbone_conv8): 86,779,392 ops (86,704,128 macc; 75,264 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 8 (backbone_conv9): 21,751,296 ops (21,676,032 macc; 75,264 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 9 (backbone_conv10): 5,513,088 ops (5,419,008 macc; 94,080 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 10 (conv12_1): 2,718,912 ops (2,709,504 macc; 9,408 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 11 (conv12_2): 333,760 ops (322,560 macc; 11,200 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 12: 5,419,008 ops (5,419,008 macc; 0 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 13: 161,280 ops (161,280 macc; 0 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 14: 2,709,504 ops (2,709,504 macc; 0 comp; 0 add; 0 mul; 0 bitwise)
+    Layer 15: 80,640 ops (80,640 macc; 0 comp; 0 add; 0 mul; 0 bitwise)
 
   RESOURCE USAGE
-  Weight memory: 275,184 bytes out of 442,368 bytes total (62%)
-  Bias memory:   536 bytes out of 2,048 bytes total (26%)
+  Weight memory: 274,680 bytes out of 442,368 bytes total (62.1%)
+  Bias memory:   520 bytes out of 2,048 bytes total (25.4%)
 */
 
 /* Number of outputs for this network */
-#define CNN_NUM_OUTPUTS 64
+#define CNN_NUM_OUTPUTS 560
 
 /* Use this timer to time the inference */
-//#define CNN_INFERENCE_TIMER MXC_TMR0
+// #define CNN_INFERENCE_TIMER MXC_TMR0
 
 /* Port pin actions used to signal that processing is active */
 

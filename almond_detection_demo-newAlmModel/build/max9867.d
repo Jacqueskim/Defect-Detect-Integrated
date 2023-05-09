@@ -1,4 +1,4 @@
-J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel/build/max9867.o: \
+J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel_new/build/max9867.o: \
  j:\ece189\maximsdk\libraries\miscdrivers\codec\max9867.c \
  j:\ece189\maximsdk\tools\gnutools\10.3\lib\gcc\arm-none-eabi\10.3.1\include\stdint.h \
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\stdint.h \

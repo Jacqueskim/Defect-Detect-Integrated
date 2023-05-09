@@ -182,7 +182,7 @@ void run_cnn(int x_offset, int y_offset)
     } else {
         parity = 1;
     }
-    printf("w:%d: h%d  offset:%d\n",w,h,offset);
+    printf("w:%d: h%d  offset:%d parity:%d\n",w,h,offset,parity);
 
     // Get image line by line
     for (row = 0; row < h; row++) {    
