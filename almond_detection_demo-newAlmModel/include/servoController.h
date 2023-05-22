@@ -23,4 +23,5 @@ void add_Object_To_Queue(ServoController *sc, float x, float y, int currentEncod
 int *check_for_Encoder_Event(ServoController *sc, int encoderVal, int *numIndices);
 int odd_servo_mapper(float min_x, float max_x, float x);
 int even_servo_mapper(float min_x, float max_x, float x);
+int getMinValueController(ServoController* sc,int* index);
 #endif

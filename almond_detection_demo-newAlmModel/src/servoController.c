@@ -12,7 +12,7 @@ int add_position_to_queue(ServoController *sc, int queueIndex, int position) {
     if (queueIndex >= 0 && queueIndex < NUM_QUEUES) {
          int topVal = peek_top(&sc->queues[queueIndex]);
          if(topVal < 0 || topVal < (position + QUEUEING_THRESHOLD)){
-            enqueue(&sc->queues[queueIndex], position);
+            oldEnqueue(&sc->queues[queueIndex], position);
             return 1;
          } // otherwise it was from the same object
         
@@ -24,7 +24,7 @@ int add_position_to_queue(ServoController *sc, int queueIndex, int position) {
 
 int get_next_position(ServoController *sc, int queueIndex) {
     if (queueIndex >= 0 && queueIndex < NUM_QUEUES) {
-        return dequeue(&sc->queues[queueIndex]);
+        return oldDequeue(&sc->queues[queueIndex]);
     } else {
         printf("Invalid queue index\n");
         return -1;
@@ -75,11 +75,23 @@ int *check_for_Encoder_Event(ServoController *sc, int encoderVal, int *numIndice
         if (topVal < encoderVal && topVal > 0) {
             indices[*numIndices] = i;
             (*numIndices)++;
-            dequeue(&sc->queues[i]);
+            oldDequeue(&sc->queues[i]);
         }
         
     }
     return indices;
+}
+int getMinValueController(ServoController* sc, int* index){
+    int minV = 1000000;
+    for (int i = 0; i < NUM_QUEUES; i++) {
+        int topVal = peek_top(&sc->queues[i]);
+        if (topVal > 0 && topVal < minV) {
+            minV = topVal;
+            (*index) = i;
+        }
+    
+    }
+    return minV;
 }
 
 int odd_servo_mapper(float min_y, float max_y, float y){

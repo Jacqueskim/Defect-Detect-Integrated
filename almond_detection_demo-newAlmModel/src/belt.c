@@ -1,10 +1,7 @@
 #include "belt.h"
-#include "board.h"
-#include "mxc_device.h"
-#include "lp.h"
-#include "mxc_delay.h"
 
-void initializeBelt(){
+
+mxc_tmr_cfg_t* initializeBelt(){
     mxc_tmr_cfg_t tmr2; // to configure timer
     
 
@@ -22,11 +19,13 @@ void initializeBelt(){
         printf("Failed Counter timer Initialization.\n");
         return;
     }
+    MXC_TMR_EnableInt(COUNTER_TIMER);
     const mxc_gpio_cfg_t optional_gpio_cfg_tmr0 = { MXC_GPIO0, (MXC_GPIO_PIN_8), MXC_GPIO_FUNC_ALT2,
                                        MXC_GPIO_PAD_NONE, MXC_GPIO_VSSEL_VDDIO };
     MXC_GPIO_Config(&optional_gpio_cfg_tmr0);
 
     MXC_TMR_Start(COUNTER_TIMER);
+    return &tmr2;
 
 }
 void setBeltSpeed(uint8_t DUTY_CYCLE){

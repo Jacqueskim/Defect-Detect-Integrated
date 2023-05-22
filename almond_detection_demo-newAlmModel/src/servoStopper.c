@@ -34,3 +34,15 @@ int *check_for_Close_Event(ServoStopper *stopper, int encoderVal, int *numIndice
         }
     }
 }
+int getMinValue(ServoStopper* sc, int* index){
+    int minV = 1000000;
+    for (int i = 0; i < ARRAY_SIZE; i++) {
+        int topVal = peek_top(&sc->servo_stopper[i]);
+        if (topVal > 0 && topVal < minV) {
+            minV = topVal;
+            (*index) = i;
+        }
+    
+    }
+    return minV;
+}
