@@ -10,7 +10,11 @@
 
 #include <stdint.h>
 #include <stdio.h>
-void initializeBelt();
+#include "board.h"
+#include "mxc_device.h"
+#include "lp.h"
+#include "mxc_delay.h"
+mxc_tmr_cfg_t* initializeBelt();
 void setBeltSpeed(uint8_t DUTY_CYCLE);
 uint32_t getBeltPosition();
 void moveBeltDistance(uint32_t inches,uint8_t speed);

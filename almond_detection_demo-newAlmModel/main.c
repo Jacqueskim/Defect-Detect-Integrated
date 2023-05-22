@@ -20,11 +20,17 @@
 #include "tft_utils.h"
 #include "servoController.h"
 #include "servoStopper.h"
+#include "interuptQueue.h"
+
 #include "PCA9685.h"
 #include "belt.h"
 
 ServoController sc;
 ServoStopper ss;
+EventQueue openEq;
+EventQueue closeEq;
+pca9685_driver_t PCA9685;
+mxc_tmr_cfg_t* beltTimer;
 
 #define CONSOLE_BAUD 115200
 #define COMM_BAUD 9600
@@ -207,12 +213,53 @@ void openValve(pca9685_driver_t PCA9685,uint8_t num,int time){
 
 
 void object_detected(float x, float y){
-    add_Object_To_Queue(&sc,x,y,getBeltPosition(), get_offset());
+    //add_Object_To_Queue(&sc,x,y,getBeltPosition(), get_offset());
+
     printf("x center is: %f , y center is %f \n",x,y);
 }
 void object_detected_test(float x, float y, int testVal){
     add_Object_To_Queue(&sc,x,y,testVal,get_offset());
     printf("x center is: %f , y center is %f \n",x,y);
+}
+void timerEventHandler(){
+    MXC_TMR_ClearFlags(COUNTER_TIMER);
+    uint32_t count = getBeltPosition();
+    printf("Encoder Count: %u\n",count);
+    int *indices;
+    int numberOfServosOn;
+    indices = check_for_Encoder_Event(&sc, count, &numberOfServosOn);
+    //printf("In helper_function, %d queues have top values greater than %d:\n", count, encoderVal);
+    for (int k = 0; k < numberOfServosOn; k++) {
+        PCA9685.setPWM(indices[k],0,valvePositions[indices[k]][0]);
+        printf("turning on servo: %u\n", indices[k]);
+        add_to_servo_count(&ss,indices[k],count);
+    }
+
+    indices = check_for_Close_Event(&ss, count, &numberOfServosOn);
+    for (int k = 0; k < numberOfServosOn; k++) {
+        PCA9685.setPWM(indices[k],0,valvePositions[indices[k]][1]);
+        printf("closing servo: %u\n", indices[k]);
+    }
+    free(indices);
+    int stopIndex = 0;
+    int openIndex  = 0;
+    int minStopper = getMinValue(&ss,stopIndex);
+    int minOpener = getMinValueController(&sc, openIndex);
+    
+
+
+    create_next_timer_event(min(minStopper,minOpener));
+    
+   
+}
+
+
+void create_next_timer_event(int tmr_value){
+   MXC_TMR_SetCompare(beltTimer,tmr_value);
+}
+void interuptSetup(){
+    MXC_TMR_EnableInt(TMR0_IRQn);
+    MXC_NVIC_SetVector(TMR0_IRQn,timerEventHandler);
 }
 
 int main(void)
@@ -356,7 +403,8 @@ int main(void)
     error = MXC_I2C_Init(I2C_MASTER, 1, 0);
     init_servo_controller(&sc);
     init_servo_stopper(&ss);
-    
+    //createQueue(&openEq);
+    //createQueue(&closeEq);
     if (error != E_NO_ERROR) {
         printf("-->Failed master\n");
         return error;
@@ -364,11 +412,12 @@ int main(void)
         printf("\n-->I2C Master Initialization Complete\n");
     }
     MXC_I2C_SetFrequency(I2C_MASTER, I2C_FREQ);
-    pca9685_driver_t PCA9685 = PCA9685_Open();
+    PCA9685 = PCA9685_Open();
     PCA9685.init(I2C_MASTER,PCA9685_I2C_SLAVE_ADDR);
     PCA9685.setPWMFreq(50);
 
-    initializeBelt();
+    beltTimer = initializeBelt();
+    interuptSetup();
     // moveBeltDistance(6,100);
     setBeltSpeed(5);
 
@@ -402,6 +451,7 @@ int main(void)
    */ 
     while (1)
     {
+        /*
         uint32_t count = getBeltPosition();
         printf("Encoder Count: %u\n",count);
         int *indices;
@@ -422,6 +472,7 @@ int main(void)
            printf("closing servo: %u\n", indices[k]);
         }
         free(indices);
+        */
         //face_detection();
         MXC_SYS_ClockEnable(MXC_SYS_PERIPH_CLOCK_CNN);
         run_cnn(0, 0);

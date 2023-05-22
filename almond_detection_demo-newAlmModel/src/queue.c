@@ -7,7 +7,7 @@ void init_queue(Queue *q) {
     q->size = 0;
 }
 
-void enqueue(Queue *q, int value) {
+void oldEnqueue(Queue *q, int value) {
     if (is_full(q)) {
         printf("Queue is full\n");
         return;
@@ -18,7 +18,7 @@ void enqueue(Queue *q, int value) {
     q->size++;
 }
 
-int dequeue(Queue *q) {
+int oldDequeue(Queue *q) {
     if (is_empty(q)) {
         return -1;
     }

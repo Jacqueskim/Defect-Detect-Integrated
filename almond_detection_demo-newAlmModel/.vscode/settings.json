@@ -1,5 +1,4 @@
 {
-    "MAXIM_PATH":"J:/ECE189/MaximSDK", // Set this to the installed location of the MaximSDK.  Only use forward slashes '/' when setting this path!
     "update.mode": "manual",
     "extensions.autoUpdate": false,
 
@@ -95,7 +94,9 @@
         "servocontroller.h": "c",
         "facedetection.h": "c",
         "mxc_delay.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "stdint.h": "c",
+        "belt.h": "c"
     },
     "git.ignoreLimitWarning": true
 }
