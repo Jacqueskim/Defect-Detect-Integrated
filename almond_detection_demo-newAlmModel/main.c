@@ -20,15 +20,13 @@
 #include "tft_utils.h"
 #include "servoController.h"
 #include "servoStopper.h"
-#include "interuptQueue.h"
 
 #include "PCA9685.h"
 #include "belt.h"
 
 ServoController sc;
 ServoStopper ss;
-EventQueue openEq;
-EventQueue closeEq;
+
 pca9685_driver_t PCA9685;
 mxc_tmr_cfg_t* beltTimer;
 
