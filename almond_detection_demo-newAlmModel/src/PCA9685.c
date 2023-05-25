@@ -57,6 +57,8 @@ static int pca9685_setPWMFreq(float freq){
     write8(&req,PCA9685_MODE1, 0x20);
 }
 static int pca9685_setPWM(uint8_t num, uint16_t on,uint16_t off) {
+    //hack for pcb
+    num=15-num;
     uint8_t bytes[5]={PCA9685_LED0_ON_L+4*num,on,on>>8,off,off>>8};
     i2c_write(&req,&bytes,5);
 }

@@ -5,9 +5,9 @@
 #include "PCA9685.h"
 
 #define NUM_QUEUES 9
-#define BASE_OFFSET 1500
-#define ENCODER_PER_SCREEN_HEIGHT 250.0
-#define ENCODER_BACK_LINE_OFFSET 500
+#define BASE_OFFSET 600
+#define ENCODER_PER_SCREEN_HEIGHT 500.0
+#define ENCODER_BACK_LINE_OFFSET 400
 #define QUEUEING_THRESHOLD 250
 
 
@@ -23,5 +23,4 @@ void add_Object_To_Queue(ServoController *sc, float x, float y, int currentEncod
 int *check_for_Encoder_Event(ServoController *sc, int encoderVal, int *numIndices);
 int odd_servo_mapper(float min_x, float max_x, float x);
 int even_servo_mapper(float min_x, float max_x, float x);
-int getMinValueController(ServoController* sc,int* index);
 #endif

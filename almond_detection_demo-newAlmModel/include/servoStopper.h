@@ -14,6 +14,5 @@ void init_servo_stopper(ServoStopper *stopper);
 int stop_servo(ServoStopper *stopper, int servo_number, int encoderVal);
 void add_to_servo_count(ServoStopper *stopper, int servo_number, int count);
 int *check_for_Close_Event(ServoStopper *stopper, int encoderVal, int *numIndices);
-int getMinValue(ServoStopper* sc, int* index);
 
 #endif // SERVOSTOPPER_H

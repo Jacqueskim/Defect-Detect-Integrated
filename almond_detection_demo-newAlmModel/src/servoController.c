@@ -12,7 +12,7 @@ int add_position_to_queue(ServoController *sc, int queueIndex, int position) {
     if (queueIndex >= 0 && queueIndex < NUM_QUEUES) {
          int topVal = peek_top(&sc->queues[queueIndex]);
          if(topVal < 0 || topVal < (position + QUEUEING_THRESHOLD)){
-            oldEnqueue(&sc->queues[queueIndex], position);
+            enqueue(&sc->queues[queueIndex], position);
             return 1;
          } // otherwise it was from the same object
         
@@ -24,7 +24,7 @@ int add_position_to_queue(ServoController *sc, int queueIndex, int position) {
 
 int get_next_position(ServoController *sc, int queueIndex) {
     if (queueIndex >= 0 && queueIndex < NUM_QUEUES) {
-        return oldDequeue(&sc->queues[queueIndex]);
+        return dequeue(&sc->queues[queueIndex]);
     } else {
         printf("Invalid queue index\n");
         return -1;
@@ -43,7 +43,7 @@ void add_Object_To_Queue(ServoController *sc, float x, float y, int currentEncod
 {
     int servo = 0;
     if (offset == 0){
-        servo = odd_servo_mapper(0.00,1.10,y);
+        servo = odd_servo_mapper(0.00,1.00,y);
         printf("using odd servo\n");
     } else {
         servo = even_servo_mapper(0.00,1.00,y);
@@ -75,23 +75,11 @@ int *check_for_Encoder_Event(ServoController *sc, int encoderVal, int *numIndice
         if (topVal < encoderVal && topVal > 0) {
             indices[*numIndices] = i;
             (*numIndices)++;
-            oldDequeue(&sc->queues[i]);
+            dequeue(&sc->queues[i]);
         }
         
     }
     return indices;
-}
-int getMinValueController(ServoController* sc, int* index){
-    int minV = 1000000;
-    for (int i = 0; i < NUM_QUEUES; i++) {
-        int topVal = peek_top(&sc->queues[i]);
-        if (topVal > 0 && topVal < minV) {
-            minV = topVal;
-            (*index) = i;
-        }
-    
-    }
-    return minV;
 }
 
 int odd_servo_mapper(float min_y, float max_y, float y){
@@ -100,13 +88,13 @@ int odd_servo_mapper(float min_y, float max_y, float y){
     switch (range)
     {
     case 0:
-        return 8;
+        return 0;
     case 1:
-        return 7;
+        return 1;
     case 2:
-        return 6;
+        return 2;
     case 3:
-        return 5;
+        return 3;
     case 4:
         return 4;
     }
@@ -121,13 +109,13 @@ int even_servo_mapper(float min_y, float max_y, float y){
     case 0:
         return 4;
     case 1:
-        return 3;
+        return 5;
     case 2:
-        return 2;
+        return 6;
     case 3:
-        return 1;
+        return 7;
     case 4:
-        return 0;
+        return 8;
     }
     
 }
