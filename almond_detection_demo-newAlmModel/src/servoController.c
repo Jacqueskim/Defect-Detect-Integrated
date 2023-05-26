@@ -43,10 +43,10 @@ void add_Object_To_Queue(ServoController *sc, float x, float y, int currentEncod
 {
     int servo = 0;
     if (offset == 0){
-        servo = odd_servo_mapper(0.00,1.00,y);
+        servo = odd_servo_mapper(0.05,0.95,y);
         printf("using odd servo\n");
     } else {
-        servo = even_servo_mapper(0.00,1.00,y);
+        servo = even_servo_mapper(0.05,0.95,y);
         printf("using even servo\n");
     }
     
