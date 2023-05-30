@@ -1,4 +1,4 @@
-J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel/build/ov7692.o: \
+J:/ECE189/ECE189/almond_detection_demo-newAlmModel/build/ov7692.o: \
  j:\ece189\maximsdk\libraries\miscdrivers\camera\ov7692.c \
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\stdio.h \
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\_ansi.h \

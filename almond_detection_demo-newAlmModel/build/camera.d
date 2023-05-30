@@ -1,4 +1,4 @@
-J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel/build/camera.o: \
+J:/ECE189/ECE189/almond_detection_demo-newAlmModel/build/camera.o: \
  j:\ece189\maximsdk\libraries\miscdrivers\camera\camera.c \
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\stdlib.h \
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\machine\ieeefp.h \
