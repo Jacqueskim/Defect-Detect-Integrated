@@ -1,4 +1,4 @@
-J:/ECE189/ECE189/almond_detection_demo-newAlmModel/build/PCA9685.o: \
+J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel/build/PCA9685.o: \
  src/PCA9685.c include/PCA9685.h \
  j:\ece189\maximsdk\tools\gnutools\10.3\lib\gcc\arm-none-eabi\10.3.1\include\stdint.h \
  j:\ece189\maximsdk\tools\gnutools\10.3\arm-none-eabi\include\stdint.h \

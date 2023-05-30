@@ -1,4 +1,4 @@
-J:/ECE189/ECE189/almond_detection_demo-newAlmModel/build/pb.o: \
+J:/ECE189/MaximSDK/Examples/MAX78000/almond_detection_demo-newAlmModel/build/pb.o: \
  j:\ece189\maximsdk\libraries\miscdrivers\pushbutton\pb.c \
  j:\ece189\maximsdk\tools\gnutools\10.3\lib\gcc\arm-none-eabi\10.3.1\include\stddef.h \
  J:/ECE189/MaximSDK/Libraries/PeriphDrivers/Include/MAX78000/mxc_device.h \
