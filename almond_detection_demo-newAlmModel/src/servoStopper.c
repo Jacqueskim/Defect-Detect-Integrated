@@ -20,7 +20,7 @@ int stop_servo(ServoStopper *stopper, int servo_number, int encoderVal) {
 
 void add_to_servo_count(ServoStopper *stopper, int servo_number, int count) {
     if (servo_number >= 0 && servo_number < ARRAY_SIZE) {
-        stopper->servo_stopper[servo_number] = count + 250;
+        stopper->servo_stopper[servo_number] = count + SERVO_CLOSE_OFFSET;
     }
 }
 int *check_for_Close_Event(ServoStopper *stopper, int encoderVal, int *numIndices){

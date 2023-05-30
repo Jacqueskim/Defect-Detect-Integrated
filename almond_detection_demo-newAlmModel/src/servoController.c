@@ -43,10 +43,10 @@ void add_Object_To_Queue(ServoController *sc, float x, float y, int currentEncod
 {
     int servo = 0;
     if (offset == 0){
-        servo = odd_servo_mapper(0.05,0.95,y);
+        servo = odd_servo_mapper(0.00,1.00,y);
         printf("using odd servo\n");
     } else {
-        servo = even_servo_mapper(0.05,0.95,y);
+        servo = even_servo_mapper(0.00,1.00,y);
         printf("using even servo\n");
     }
     
@@ -83,26 +83,34 @@ int *check_for_Encoder_Event(ServoController *sc, int encoderVal, int *numIndice
 }
 
 int odd_servo_mapper(float min_y, float max_y, float y){
-    float diff = (max_y - min_y)/5;
+    float diff = (max_y - min_y)/9;
     int range = (y - min_y)/diff;
     switch (range)
     {
     case 0:
         return 0;
     case 1:
-        return 1;
+        return 0;
     case 2:
-        return 2;
+        return 1;
     case 3:
-        return 3;
+        return 1;
     case 4:
+        return 2;
+    case 5:
+        return 2;
+    case 6:
+        return 3;
+    case 7:
+        return 3;
+    case 8:
         return 4;
     }
     
 }
 
 int even_servo_mapper(float min_y, float max_y, float y){
-    float diff = (max_y - min_y)/5;
+    float diff = (max_y - min_y)/9;
     int range = (y - min_y)/diff;
     switch (range)
     {
@@ -111,10 +119,18 @@ int even_servo_mapper(float min_y, float max_y, float y){
     case 1:
         return 5;
     case 2:
-        return 6;
+        return 5;
     case 3:
-        return 7;
+        return 6;
     case 4:
+        return 6;
+    case 5:
+        return 7;
+    case 6:
+        return 7;
+    case 7:
+        return 8;
+    case 8:
         return 8;
     }
     

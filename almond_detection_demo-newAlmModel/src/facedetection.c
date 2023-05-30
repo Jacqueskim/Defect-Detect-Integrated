@@ -176,7 +176,7 @@ void run_cnn(int x_offset, int y_offset)
     // Get the details of the image from the camera driver.
     camera_get_image(&raw, &imgLen, &w, &h);
 
-    offset ^= X_OFFSET; //Alternate left and right 224x168 image from 448x240 frame
+    offset ^= IMAGE_W; //Alternate left and right 224x168 image from 448x240 frame
     if (offset == 0){
         parity = 0;
     } else {

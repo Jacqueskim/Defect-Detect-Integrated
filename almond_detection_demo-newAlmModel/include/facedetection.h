@@ -33,7 +33,17 @@
 
 #ifndef _FACEDETECTION_H_
 #define _FACEDETECTION_H_
+#define DMA_TFT   // Enables use of DMA to update TFT
+#define TFT_DOWNSAMPLE  // Enables downsampling of TFT images from 224x168 to 112x168
+//#define CAMERA_MANUAL_EXP  // Turns off AEC/AGC/AWB
+#ifndef DMA_TFT
+#define CAMERA_SLEEP    // Camera goes to sleep once a frame is received, and wakes up
+                        // before capturing the next frame. It reduces the random delay
+                        // from start capturing to receiving first samples of the camera
+                        // data appeared in free run mode as we would need to wait for 
+                        // the beginning of the next frame.
 
+#endif
 // Feather board default orientation: horizontal, camera at the top
 #define ROTATE_FEATHER_BOARD	// rotate 180 degree, camera at the bottom
 
@@ -45,8 +55,8 @@
 #define TFT_WIDTH  320
 #define TFT_HEIGHT 240
 
-#define CAMERA_IMAGE_XRES 400//224
-#define CAMERA_IMAGE_YRES 300//168
+#define CAMERA_IMAGE_XRES 448//224
+#define CAMERA_IMAGE_YRES 336//168
 #define IMAGE_SIZE_X 168
 #define IMAGE_SIZE_Y 224
 
@@ -56,7 +66,7 @@
 #define IMAGE_H     168
 #define IMAGE_W     224
 #define FRAME_COLOR 0x535A
-#define X_OFFSET    CAMERA_IMAGE_XRES - IMAGE_W
+
 
 #define LCD_BYTE_PER_PIXEL 2  //RGB565
 
