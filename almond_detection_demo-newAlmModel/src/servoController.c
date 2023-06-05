@@ -15,6 +15,9 @@ int add_position_to_queue(ServoController *sc, int queueIndex, int position) {
             enqueue(&sc->queues[queueIndex], position);
             return 1;
          } // otherwise it was from the same object
+         else{
+            iterate_top(&sc->queues[queueIndex])
+         }
         
     } else {
         printf("Invalid queue index\n");
@@ -24,7 +27,7 @@ int add_position_to_queue(ServoController *sc, int queueIndex, int position) {
 
 int get_next_position(ServoController *sc, int queueIndex) {
     if (queueIndex >= 0 && queueIndex < NUM_QUEUES) {
-        return dequeue(&sc->queues[queueIndex]);
+        return dequeue(&sc->queues[queueIndex]).first;
     } else {
         printf("Invalid queue index\n");
         return -1;
@@ -72,7 +75,9 @@ int *check_for_Encoder_Event(ServoController *sc, int encoderVal, int *numIndice
 
     for (int i = 0; i < NUM_QUEUES; i++) {
         int topVal = peek_top(&sc->queues[i]);
-        if (topVal < encoderVal && topVal > 0) {
+        int topCounter = peek_top_second(&sc->queues[i]);
+        // ensure that object was seen more than once
+        if (topVal < encoderVal && topVal > 0 && topCounter > 1) {
             indices[*numIndices] = i;
             (*numIndices)++;
             dequeue(&sc->queues[i]);
