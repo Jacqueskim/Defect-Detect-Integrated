@@ -12,21 +12,33 @@ void enqueue(Queue *q, int value) {
         printf("Queue is full\n");
         return;
     }
-
+    Pair p;
+    p.first = value;
+    p.second = 1;
+    
     q->rear = (q->rear + 1) % MAX_QUEUE_SIZE;
-    q->data[q->rear] = value;
+    q->data[q->rear] = p;
     q->size++;
 }
 
-int dequeue(Queue *q) {
+Pair dequeue(Queue *q) {
     if (is_empty(q)) {
-        return -1;
+        Pair x;
+        x.first = -1;
+        x.second = 1;
+        return x;
     }
 
-    int value = q->data[q->front];
+    Pair value = q->data[q->front];
     q->front = (q->front + 1) % MAX_QUEUE_SIZE;
     q->size--;
     return value;
+}
+void iterate_top(Queue *q){
+     if (is_empty(q)) {
+        return;
+    }
+    q->data[q->front].second++;
 }
 
 int peek_top(Queue *q) {
@@ -34,7 +46,14 @@ int peek_top(Queue *q) {
         return -1;
     }
 
-    return q->data[q->front];
+    return q->data[q->front].first;
+}
+
+int peek_top_second(Queue* q){
+    if(is_empty(q)){
+        return 1;
+    }
+    return q->data[q->front].second;
 }
 
 int is_empty(Queue *q) {
