@@ -8,7 +8,7 @@
 #define BASE_OFFSET 600
 #define ENCODER_PER_SCREEN_HEIGHT 500.0
 #define ENCODER_BACK_LINE_OFFSET 400
-#define QUEUEING_THRESHOLD 250
+#define QUEUEING_THRESHOLD 50
 
 
 typedef struct servoController {

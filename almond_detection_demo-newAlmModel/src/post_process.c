@@ -348,8 +348,9 @@ void nms(void)
             if (cls_prob < MIN_CLASS_SCORE) {
                 continue;
             }
+            
             conf = cls_prob;
-
+            printf("The cls_prob is: %u\n", cls_prob);
             //num_nms_priors[class_idx] = insert_nms_prior(cls_prob, prior_idx, nms_scores[class_idx], nms_indices[class_idx], num_nms_priors[class_idx]);
             insert_nms_prior(cls_prob, prior_idx, nms_scores[class_idx], nms_indices[class_idx],
                              &num_nms_priors[class_idx]);

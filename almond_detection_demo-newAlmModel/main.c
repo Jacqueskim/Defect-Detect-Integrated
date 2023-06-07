@@ -52,7 +52,7 @@ uint16_t valvePositions[9][2] = {
 static const uint8_t camera_settings[][2] = {
     {0x13, 0xEA},
     {0x15, 0x00}, // Gain control(9:8)
-    {0x00, 0x3F}, // Gain control(7:0)
+    {0x00, 0x4F}, // Gain control(7:0)
     {0x0F, 0x00}, // Exposure time control (15:8)
     {0x10, 0x7F}, // Exposure time control (7:0)
     {0x0e, 0x08}, // Sleep mode
@@ -193,7 +193,7 @@ mxc_wut_cfg_t cfg;
 void timerEventHandler()
 {
     uint32_t count = getBeltPosition();
-    printf("Encoder Count: %u\n", count);
+    // printf("Encoder Count: %u\n", count);
     int *indices;
     int numberOfServosOn;
     indices = check_for_Encoder_Event(&sc, count, &numberOfServosOn);
@@ -201,7 +201,7 @@ void timerEventHandler()
     for (int k = 0; k < numberOfServosOn; k++)
     {
         PCA9685.setPWM(indices[k], 0, valvePositions[indices[k]][0]);
-        printf("turning on servo: %u\n", indices[k]);
+        // printf("turning on servo: %u\n", indices[k]);
         add_to_servo_count(&ss, indices[k], count);
     }
 
@@ -209,7 +209,7 @@ void timerEventHandler()
     for (int k = 0; k < numberOfServosOn; k++)
     {
         PCA9685.setPWM(indices[k], 0, valvePositions[indices[k]][1]);
-        printf("closing servo: %u\n", indices[k]);
+        // printf("closing servo: %u\n", indices[k]);
     }
     free(indices);
 }

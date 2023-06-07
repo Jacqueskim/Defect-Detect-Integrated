@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "servoController.h"
 
 void init_servo_controller(ServoController *sc) {
@@ -11,12 +12,14 @@ void init_servo_controller(ServoController *sc) {
 int add_position_to_queue(ServoController *sc, int queueIndex, int position) {
     if (queueIndex >= 0 && queueIndex < NUM_QUEUES) {
          int topVal = peek_top(&sc->queues[queueIndex]);
-         if(topVal < 0 || topVal < (position + QUEUEING_THRESHOLD)){
+         int dif = abs(topVal - position);
+         printf("Diff:%d\n",dif);
+         if(topVal < 0 || dif > QUEUEING_THRESHOLD){
             enqueue(&sc->queues[queueIndex], position);
             return 1;
          } // otherwise it was from the same object
          else{
-            iterate_top(&sc->queues[queueIndex])
+            iterate_top(&sc->queues[queueIndex]);
          }
         
     } else {
@@ -77,7 +80,7 @@ int *check_for_Encoder_Event(ServoController *sc, int encoderVal, int *numIndice
         int topVal = peek_top(&sc->queues[i]);
         int topCounter = peek_top_second(&sc->queues[i]);
         // ensure that object was seen more than once
-        if (topVal < encoderVal && topVal > 0 && topCounter > 1) {
+        if (topVal < encoderVal && topVal > 0 && topCounter >= 1) {
             indices[*numIndices] = i;
             (*numIndices)++;
             dequeue(&sc->queues[i]);

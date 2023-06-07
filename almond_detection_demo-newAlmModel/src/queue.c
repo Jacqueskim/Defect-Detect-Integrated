@@ -38,7 +38,7 @@ void iterate_top(Queue *q){
      if (is_empty(q)) {
         return;
     }
-    q->data[q->front].second++;
+    q->data[q->front].second = q->data[q->front].second + 1;
 }
 
 int peek_top(Queue *q) {
