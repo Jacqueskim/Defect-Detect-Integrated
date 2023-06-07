@@ -6,7 +6,7 @@
 **************************************************************************************************/
 
 /*
- * This header file was automatically @generated for the PINTO7 network from a template.
+ * This header file was automatically @generated for the PINTO17 network from a template.
  * Please do not edit; instead, edit the template and regenerate.
  */
 
@@ -43,7 +43,7 @@ typedef int16_t q15_t;
 
   RESOURCE USAGE
   Weight memory: 274,680 bytes out of 442,368 bytes total (62.1%)
-  Bias memory:   520 bytes out of 2,048 bytes total (25.4%)
+  Bias memory:   536 bytes out of 2,048 bytes total (26.2%)
 */
 
 /* Number of outputs for this network */

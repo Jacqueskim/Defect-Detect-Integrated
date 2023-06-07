@@ -5,10 +5,10 @@
 #include "PCA9685.h"
 
 #define NUM_QUEUES 9
-#define BASE_OFFSET 600
+#define BASE_OFFSET 700
 #define ENCODER_PER_SCREEN_HEIGHT 500.0
-#define ENCODER_BACK_LINE_OFFSET 400
-#define QUEUEING_THRESHOLD 50
+#define ENCODER_BACK_LINE_OFFSET 500
+#define QUEUEING_THRESHOLD 250
 
 
 typedef struct servoController {
