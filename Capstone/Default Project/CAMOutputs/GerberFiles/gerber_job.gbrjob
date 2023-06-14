@@ -1,0 +1,24 @@
+{
+    "Header": {
+        "Comment": "All values are metric (mm)",
+        "CreationDate": "2023-05-08T18:39:44Z",
+        "GenerationSoftware": {
+            "Application": "Fusion 360 Electronics",
+            "Vendor": "Autodesk",
+            "Version": "9.7.0"
+        },
+        "Part": "Single"
+    },
+    "Overall": {
+        "BoardThickness": 1.1978,
+        "LayerNumber": 4,
+        "Name": {
+            "ProjectId": "PCB v36"
+        },
+        "Owner": "Shaunak Kale <shaunak@ucsb.edu>",
+        "Size": {
+            "X": 128.25,
+            "Y": 157.15
+        }
+    }
+}
